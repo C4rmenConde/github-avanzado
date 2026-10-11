@@ -1,0 +1,31 @@
+name: CD
+
+on:
+  push:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  workflow_dispatch:
+
+jobs:
+  github-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Incrementar version
+        run: |
+          echo "AppVersion-2 $(date)" >> main.txt
+
+  selfhosted-job:
+    needs: github-job
+    runs-on: self-hosted
+
+    steps:
+      - name: Comprobar PROD_TOKEN
+        run: |
+          if [ "${{ secrets.PROD_TOKEN }}" = "prueba456" ]; then
+            echo "Token correcto"
+          else
+            exit 1
+          fi

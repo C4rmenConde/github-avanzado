@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  workflow_dispatch:
+
+jobs:
+  github-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Actualizar README
+        run: |
+          echo "Añadida feature: ${{ github.ref_name }}" >> README.md
+
+  selfhosted-job:
+    needs: github-job
+    runs-on: self-hosted
+
+    steps:
+      - name: Comprobar DEV_TOKEN
+        run: |
+          if [ "${{ secrets.DEV_TOKEN }}" = "prueba123" ]; then
+            echo "Token correcto"
+          else
+            exit 1
+          fi
