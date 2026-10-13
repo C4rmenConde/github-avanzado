@@ -23,9 +23,11 @@ jobs:
 
     steps:
       - name: Comprobar PROD_TOKEN
-        run: |
-          if [ "${{ secrets.PROD_TOKEN }}" = "prueba456" ]; then
-            echo "Token correcto"
-          else
-            exit 1
-          fi
+  shell: powershell
+  run: |
+    if ("${{ secrets.PROD_TOKEN }}" -eq "prueba456") {
+      Write-Host "Token correcto"
+    } else {
+      exit 1
+    }
+``

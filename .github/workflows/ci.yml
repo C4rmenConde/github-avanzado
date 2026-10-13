@@ -23,9 +23,10 @@ jobs:
 
     steps:
       - name: Comprobar DEV_TOKEN
-        run: |
-          if [ "${{ secrets.DEV_TOKEN }}" = "prueba123" ]; then
-            echo "Token correcto"
-          else
-            exit 1
-          fi
+  shell: powershell
+  run: |
+    if ("${{ secrets.DEV_TOKEN }}" -eq "prueba123") {
+      Write-Host "Token correcto"
+    } else {
+      exit 1
+    }
