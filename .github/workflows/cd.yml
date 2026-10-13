@@ -23,11 +23,11 @@ jobs:
 
     steps:
       - name: Comprobar PROD_TOKEN
-  shell: powershell
-  run: |
-    if ("${{ secrets.PROD_TOKEN }}" -eq "prueba456") {
-      Write-Host "Token correcto"
-    } else {
-      exit 1
-    }
-``
+        shell: powershell
+        run: |
+          if ("${{ secrets.PROD_TOKEN }}" -eq "prueba456") {
+            Write-Host "Token correcto"
+          } else {
+            exit 1
+          }
+          
