@@ -22,13 +22,13 @@ jobs:
     runs-on: self-hosted
 
     steps:
-    - name: Comprobar PROD_TOKEN
-  shell: powershell
-  run: |
-    Write-Host "PROD_TOKEN recibido"
-    if ("${{ secrets.PROD_TOKEN }}" -eq "prueba456") {
-      Write-Host "Token correcto"
-    } else {
-      Write-Host "Token incorrecto"
-      exit 1
-    }
+      - name: Comprobar PROD_TOKEN
+        shell: powershell
+        run: |
+          if ("${{ secrets.PROD_TOKEN }}" -eq "prueba456") {
+            Write-Host "Token correcto"
+          } else {
+            Write-Host "Token incorrecto"
+            exit 1
+          }
+          
